@@ -17,7 +17,10 @@ const Counter = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return state;
+  return {
+    count: state.count,
+    step: state.count,
+  };
 };
 
 export default connect(mapStateToProps)(Counter);
