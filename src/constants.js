@@ -1,4 +1,4 @@
-const CONSTANTSC = {
+const CONSTANTS = {
   LANGUAGE: {
     EN_US: "EN_US",
     UA_UA: "UA_UA",
@@ -7,4 +7,4 @@ const CONSTANTSC = {
   },
 };
 
-export default CONSTANTSC;
+export default CONSTANTS;
