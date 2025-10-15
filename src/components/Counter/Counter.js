@@ -11,28 +11,31 @@ const Counter = (props) => {
       <p>Count: {count}</p>
       <label>
         Set step:
-        <input type="number" value={step} onChange={setStep} />
+        <input
+          type="number"
+          value={step}
+          onChange={({ target: { value } }) => setStep(value)}
+        />
       </label>
       <p>Step: {step}</p>
-      <button onClick={increment}>Increment</button>
-      <button onClick={decrement}>Decrement</button>
+      <button onClick={() => increment()}>Increment</button>
+      <button onClick={() => decrement()}>Decrement</button>
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    count: state.count,
-    step: state.step,
+    count: state.counter.count,
+    step: state.counter.step,
   };
 };
 
-const mapDispatchTpProps = (dispatch) => {
-  return {
-    increment: () => dispatch(increment()),
-    decrement: () => dispatch(decrement()),
-    setStep: ({ target: { value } }) => dispatch(setStep(value)),
-  };
+
+const mapDispatchTpProps = {
+  increment,
+  decrement,
+  setStep,
 };
 
 export default connect(mapStateToProps, mapDispatchTpProps)(Counter);
