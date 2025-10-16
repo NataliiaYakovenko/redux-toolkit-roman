@@ -12,7 +12,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const getCSSName = cx(styles.header, {
-    [styles.darkTheme]: theme === THEMES.DARK,
+    [styles.blackTheme]: theme === THEMES.BLACK,
     [styles.lightTheme]: theme === THEMES.LIGHT,
   });
 
