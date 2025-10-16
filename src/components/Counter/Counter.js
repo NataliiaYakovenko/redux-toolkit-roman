@@ -66,13 +66,13 @@ const Counter = () => {
   const translation = translations.get(language);
   const { countText, stepText, incrementText, decrementText } = translation;
 
-  const className = cx({
+  const getCSSName = cx({
     [styles.darkTheme]: theme === THEMES.DARK,
     [styles.lightTheme]: theme === THEMES.LIGHT,
   });
 
   return (
-    <div className={className}>
+    <div className={getCSSName}>
       <select
         value={language}
         onChange={({ target: { value } }) => setLang(value)}
