@@ -5,6 +5,7 @@ import { increment, decrement, setStep } from "../../store/slices/counterSlice";
 import { setLang } from "../../store/slices/langSlice";
 import CONSTANTS from "../../constants";
 import styles from "./Counter.module.scss";
+import { bindActionCreators } from "@reduxjs/toolkit";
 
 const {
   LANGUAGE: { EN_US, UA_UA, PL_PL, DE_DE },
@@ -56,6 +57,11 @@ const Counter = (props) => {
   const { count, step } = useSelector((state) => state.counter);
   const dispatch = useDispatch();
 
+  const actionCreaters = bindActionCreators(
+    { setLang, setStep, increment, decrement },
+    dispatch
+  );
+
   const setLanguage = (newLang) => dispatch(setLang(newLang));
   const setNewStep = (newStep) => dispatch(setStep(newStep));
 
@@ -71,7 +77,7 @@ const Counter = (props) => {
     <div className={className}>
       <select
         value={language}
-        onChange={({ target: { value } }) => setLanguage(value)}
+        onChange={({ target: { value } }) => actionCreaters.setLang(value)}
       >
         <option value={EN_US}>English</option>
         <option value={UA_UA}>Ukranian</option>
@@ -87,11 +93,15 @@ const Counter = (props) => {
         <input
           type="number"
           value={step}
-          onChange={({ target: { value } }) => setNewStep(value)}
+          onChange={({ target: { value } }) => actionCreaters.setStep(value)}
         />
       </label>
-      <button onClick={() => dispatch(increment())}>{incrementText}</button>
-      <button onClick={() => dispatch(decrement())}>{decrementText}</button>
+      <button onClick={() => actionCreaters.increment()}>
+        {incrementText}
+      </button>
+      <button onClick={() => actionCreaters.decrement()}>
+        {decrementText}
+      </button>
     </div>
   );
 };
