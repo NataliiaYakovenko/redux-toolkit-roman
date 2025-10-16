@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import { increment, decrement, setStep } from "../../store/slices/counterSlice";
 import { setLang } from "../../store/slices/langSlice";
@@ -51,16 +51,13 @@ const translations = new Map([
 ]);
 
 const Counter = (props) => {
-  const {
-    counter: { count, step },
-    language,
-    theme,
-    setLang,
-    increment,
-    decrement,
-    setStep,
-  } = props;
-  console.log(props);
+  const language = useSelector((state) => state.lang);
+  const theme = useSelector((state) => state.theme);
+  const { count, step } = useSelector((state) => state.counter);
+  const dispatch = useDispatch();
+
+  const setLanguage = (newLang) => dispatch(setLang(newLang));
+  const setNewStep = (newStep) => dispatch(setStep(newStep));
 
   const translation = translations.get(language);
   const { countText, stepText, incrementText, decrementText } = translation;
@@ -74,7 +71,7 @@ const Counter = (props) => {
     <div className={className}>
       <select
         value={language}
-        onChange={({ target: { value } }) => setLang(value)}
+        onChange={({ target: { value } }) => setLanguage(value)}
       >
         <option value={EN_US}>English</option>
         <option value={UA_UA}>Ukranian</option>
@@ -90,28 +87,13 @@ const Counter = (props) => {
         <input
           type="number"
           value={step}
-          onChange={({ target: { value } }) => setStep(value)}
+          onChange={({ target: { value } }) => setNewStep(value)}
         />
       </label>
-      <button onClick={() => increment()}>{incrementText}</button>
-      <button onClick={() => decrement()}>{decrementText}</button>
+      <button onClick={() => dispatch(increment())}>{incrementText}</button>
+      <button onClick={() => dispatch(decrement())}>{decrementText}</button>
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    counter: state.counter,
-    language: state.lang,
-    theme: state.theme,
-  };
-};
-
-const mapDispatchTpProps = {
-  increment,
-  decrement,
-  setStep,
-  setLang,
-};
-
-export default connect(mapStateToProps, mapDispatchTpProps)(Counter);
+export default Counter;
