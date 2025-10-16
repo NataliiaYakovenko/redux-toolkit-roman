@@ -24,6 +24,7 @@ const Header = (props) => {
           <li className={styles.nowListItem}>link 1</li>
           <li className={styles.nowListItem}>link 2</li>
           <li className={styles.nowListItem}>link 3</li>
+          <li className={styles.nowListItem}>link 4</li>
         </ul>
       </nav>
 
