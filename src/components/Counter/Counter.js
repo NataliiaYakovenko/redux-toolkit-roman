@@ -67,7 +67,7 @@ const Counter = () => {
   const { countText, stepText, incrementText, decrementText } = translation;
 
   const getCSSName = cx({
-    [styles.darkTheme]: theme === THEMES.DARK,
+    [styles.blackTheme]: theme === THEMES.BLACK,
     [styles.lightTheme]: theme === THEMES.LIGHT,
   });
 
