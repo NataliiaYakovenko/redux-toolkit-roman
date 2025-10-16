@@ -51,7 +51,7 @@ const translations = new Map([
   ],
 ]);
 
-const Counter = (props) => {
+const Counter = () => {
   const language = useSelector((state) => state.lang);
   const theme = useSelector((state) => state.theme);
   const { count, step } = useSelector((state) => state.counter);

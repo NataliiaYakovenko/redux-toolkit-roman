@@ -7,7 +7,7 @@ import { setTheme } from "../../store/slices/themeSlice";
 
 const { THEMES } = CONSTANTS;
 
-const Header = (props) => {
+const Header = () => {
   const theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
 
