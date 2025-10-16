@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
-import { increment, decrement, setStep } from "../../store/slices/counterSlice";
-import { setLang } from "../../store/slices/langSlice";
+import * as counterActionCreater from "../../store/slices/counterSlice";
+import * as langActionCreaters from "../../store/slices/langSlice";
 import CONSTANTS from "../../constants";
 import styles from "./Counter.module.scss";
 import { bindActionCreators } from "@reduxjs/toolkit";
@@ -57,13 +57,11 @@ const Counter = (props) => {
   const { count, step } = useSelector((state) => state.counter);
   const dispatch = useDispatch();
 
-  const actionCreaters = bindActionCreators(
-    { setLang, setStep, increment, decrement },
-    dispatch
-  );
+  const { setStep, setLang, increment, decrement } = bindActionCreators({
+    ...counterActionCreater,
+    ...langActionCreaters,
+  }, dispatch);
 
-  const setLanguage = (newLang) => dispatch(setLang(newLang));
-  const setNewStep = (newStep) => dispatch(setStep(newStep));
 
   const translation = translations.get(language);
   const { countText, stepText, incrementText, decrementText } = translation;
@@ -77,7 +75,7 @@ const Counter = (props) => {
     <div className={className}>
       <select
         value={language}
-        onChange={({ target: { value } }) => actionCreaters.setLang(value)}
+        onChange={({ target: { value } }) => setLang(value)}
       >
         <option value={EN_US}>English</option>
         <option value={UA_UA}>Ukranian</option>
@@ -93,15 +91,11 @@ const Counter = (props) => {
         <input
           type="number"
           value={step}
-          onChange={({ target: { value } }) => actionCreaters.setStep(value)}
+          onChange={({ target: { value } }) => setStep(value)}
         />
       </label>
-      <button onClick={() => actionCreaters.increment()}>
-        {incrementText}
-      </button>
-      <button onClick={() => actionCreaters.decrement()}>
-        {decrementText}
-      </button>
+      <button onClick={() => increment()}>{incrementText}</button>
+      <button onClick={() => decrement()}>{decrementText}</button>
     </div>
   );
 };
