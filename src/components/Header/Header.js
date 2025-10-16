@@ -7,17 +7,17 @@ import { setTheme } from "../../store/slices/themeSlice";
 
 const { THEMES } = CONSTANTS;
 
-const Header = (props) => {
+const Header = () => {
   const theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
 
-  const className = cx(styles.header, {
+  const getCSSName = cx(styles.header, {
     [styles.darkTheme]: theme === THEMES.DARK,
     [styles.lightTheme]: theme === THEMES.LIGHT,
   });
 
   return (
-    <header className={className}>
+    <header className={getCSSName}>
       <h1>My counter</h1>
       <nav>
         <ul className={styles.nowList}>
