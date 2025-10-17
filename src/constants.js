@@ -6,7 +6,7 @@ const CONSTANTS = {
     DE_DE: "DE_DE",
   },
   THEMES:{
-    DARK: "DARK",
+    BLACK: "BLACK",
     LIGHT:"LGHT"
   }
 };

@@ -51,7 +51,7 @@ const translations = new Map([
   ],
 ]);
 
-const Counter = (props) => {
+const Counter = () => {
   const language = useSelector((state) => state.lang);
   const theme = useSelector((state) => state.theme);
   const { count, step } = useSelector((state) => state.counter);
@@ -66,13 +66,13 @@ const Counter = (props) => {
   const translation = translations.get(language);
   const { countText, stepText, incrementText, decrementText } = translation;
 
-  const className = cx({
-    [styles.darkTheme]: theme === THEMES.DARK,
+  const getCSSName = cx({
+    [styles.blackTheme]: theme === THEMES.BLACK,
     [styles.lightTheme]: theme === THEMES.LIGHT,
   });
 
   return (
-    <div className={className}>
+    <div className={getCSSName}>
       <select
         value={language}
         onChange={({ target: { value } }) => setLang(value)}
