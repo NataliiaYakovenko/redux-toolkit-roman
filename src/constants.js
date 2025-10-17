@@ -6,8 +6,8 @@ const CONSTANTS = {
     DE_DE: "DE_DE",
   },
   THEMES:{
-    BLACK: "BLACK",
-    LIGHT:"LGHT"
+    DARK: "DARK",
+    LIGHT:"LIGHT"
   }
 };
 
