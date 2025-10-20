@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import * as API from "api";
+import * as API from "../../api";
 
 const SLICE_NAME = "users";
 
@@ -16,18 +16,18 @@ const initialState = {
 const userSlice = createSlice({
   name: SLICE_NAME,
   initialState,
-  extraReducers: {
-    [getUsers.panding]: (state, action) => {
+  extraReducers: (builder) => {
+    builder.addCase(getUsers.pending, (state) => {
       state.isLoading = true;
-    },
-    [getUsers.fulfilled]: (state, action) => {
+    });
+    builder.addCase(getUsers.fulfilled, (state, action) => {
       state.users = action.payload;
       state.isLoading = false;
-    },
-    [getUsers.rejected]: (state, action) => {
-      state.error = action.payload;
+    });
+    builder.addCase(getUsers.rejected, (state, action) => {
+      state.error = action.error.message;
       state.isLoading = false;
-    },
+    });
   },
 });
 
